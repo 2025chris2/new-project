@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">默认内容</div>
+
+    
+    <script>
+        const obj={name:'吴悠',age:18}
+        const container=document.getElementById('container')
+        container.textContent=obj.name
+        const p1=new Proxy(obj,{
+            get(target,property){//target:数据对象 property:属性 第三个参数receiver:当前的proxy实例
+                return obj[property];
+            },
+            set(target,property,value){
+                obj[property]=value
+                container.textContent=obj.name
+            }
+        })
+        //由于你在上面的定义p1代码中，定义了get()与set()函数，所以此时可以直接用.来使用方法
+        console.log(p1.name)
+        p1.age=21;
+        p1.name='jack'
+    </script>
+</body>
+</html>

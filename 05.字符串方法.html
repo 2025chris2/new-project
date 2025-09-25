@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    startsWith():返回布尔值,表示参数字符串是否在原字符串的头部
+    endsWith():返回布尔值,表示参数字符串是否在原字符串的尾部
+    includes():返回布尔值,表示是否找到了参数字符串
+    这三个方法都在支持第二个参数，表示开始搜索的位置
+    <script>
+        let s="htll";
+        if(s.startsWith("htll",0)){//从第0个开始往右找
+        if(s.endsWith("l",3)){//从第三个开始往左找
+        if(s.includes("t",0)){//从第0个开始找是否包含
+            console.log("11");
+        }
+    }
+    }
+    </script>
+
+    repeat()
+    repeat 方法返回一个新字符串,表示将原字符串重复n次。
+
+    <script>
+        console.log('x'.repeat(3))
+        console.log('na'.repeat(2))
+    </script>
+
+
+    padStart(), padEnd()
+    ES2017引入了字符串补全长度的功能。如果某个字符串不够指定长度,会在头部或尾部补全。padStart()用于
+    头部补全,padEnd()用于尾部补全。
+    <script>
+        console.log('x'.padStart(5,'ab'))
+        console.log('x'.padStart(4,'ll'))
+        console.log('x'.padEnd(7,'ab'))
+        console.log('x'.padEnd(3,'oo'))
+    </script>
+
+
+
+    trimStart(), trimEnd()
+    ES2019对字符串实例新增了trimStart()和trimEnd()这两个方法。它们的行为与trim()一致,
+    部的空格,trimStart()消除字符串头,trimEnd()消除尾部的空格。它们返回的都是新字符串,不会修改原始字符串。
+    var s ='  itbaizhan  '
+    s.trim() // "itbaizhan"
+    s.trimStart() // "itbaizhan "
+    s.trimEnd() //" itbaizhan"
+    <script>
+        var g='  tzlonlylovehimself     ';
+        console.log(g)
+        h=g.trim();
+        console.log(h);
+
+    </script>
+
+    at()方法接受一个整数作为参数,返回参数指定位置的字符,支持负索引(即倒数的位置)。
+    温馨提示
+    如果参数位置超出了字符串范围,at()返回undefined
+    <script>
+        var i='lsjidfoj'
+        console.log(i.at(1))
+        console.log(i.at(-1))
+        console.log(i.at(21))
+    </script>
+
+</body>
+</html>

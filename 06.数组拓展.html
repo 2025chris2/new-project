@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    扩展运算法是三个点(...),将一个数组转为用逗号分隔的参数列表
+    就是将一个数组展开
+
+    <script>    
+        document.write("<br>")
+        var li=[1,2,4,3]
+        var h=Math.max(...li);//三个点展开数组，如果用Math.max(li),打印出错，无法解析数组
+        document.write(h);
+    </script>
+</body>
+</html>

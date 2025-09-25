@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    ES6新增了let命令,用来声明变量。它的用法类似于var,但是所声明的变量,只在let命令所在的代码块内有
+    效。
+    <script>
+        // 1.var关键字:函数级的作用域
+        if(true){
+            var i=10;
+        }
+        //1.1 打印了i的值，var不隔绝作用域
+        console.log(i);
+        function print(){
+            var c=10;
+            
+        }
+        //1.2 此时打印出错，因为var在函数里面定义的变量只能存在于函数里面，函数结束var变量就销毁
+        //console.log(c);
+
+        /*2.1 let关键字:let是块级作用域（花括号级别的作用域)
+          2.2 let关键字:不存在变量提升*/
+        if(true){
+            let a=10;
+            console.log(a);
+        }
+        //下面这段打印出错，超出作用域了
+        //console.log(a);
+        for(let i=0;i<10;i++)
+        {
+            console.log("zz")//仅在花括号里存在，出括号则销毁
+        }
+
+
+        //核心区别，var和let
+        var b=[];
+        for(var j=0;j<10;j++){
+            b[j]=function(){
+                console.log(j);
+            }
+        }
+        //因为由var定义的变量只有一个，每次赋值时会覆盖之前的值，以上的for loop赋值了10次
+        // 第10次结束了，但是var j已经被赋值为10了，且每一个b的数组均包含同一个j，j的值只有1个，是10，所以
+        // 无论调用哪一个列表，都打印最后一个10,类似于:var i=9;var i=11;console.log(i);最终打印11,值被覆盖
+        b[1]();b[0]();
+
+
+        var c=[];
+        for(let i=0;i<10;i++)
+        {
+            c[i]=function(){
+                console.log(i);
+            }
+        }
+        // 每次循环执行时，都在不同的花括号里，所以let的i是不同的，独一无二的，所有当访问时，打印不同的数字
+        c[3](),c[9]();
+
+
+
+
+
+    </script>
+</body>
+</html>

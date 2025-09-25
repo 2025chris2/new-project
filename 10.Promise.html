@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    同步任务:一行一行的执行代码
+    异步任务:1.setTimeout 2.ajax 异步任务的执行一定是在触发了同步任务之后执行的
+    基本概念
+    Promise是异步编程的一种解决方案,比传统的解决方案 -- 回调函数和事件 -- 更合理和更强大。它由社区
+    最早提出和实现,ES6将其写进了语言标准,统一了用法,原生提供了Promise对象
+    所谓Promise,简单说就是一个容器,里面保存着某个未来才会结束的事件(通常是一个异步操作)的结果。从
+    语法上说,Promise是一个对象,从它可以获取异步操作的消息。Promise提供统一的API,各种异步操作都
+    可以用同样的方法进行处理
+    有了Promise对象,就可以将异步操作以同步操作的流程表达出来,避免了层层嵌套的回调函数。此外,
+    Promise 对象提供统一的接口,使得控制异步操作更加容易
+    <div id="box">
+
+    </div>
+    <script>
+        var box =document.getElementById("box")
+        function LoadImageAsync(url){
+            const promise=new Promise(function(resolve,reject){
+                //异步处理
+                const image=new Image();//创建image对象
+                image.src=url
+                image.onload=function(){
+                    resolve(image)
+                }
+                image.onerror=function(){
+                    reject*new Error('Could not load image at'+url)
+                }
+            })
+            return promise;
+        }
+        const promise=LoadImageAsync("https://p8.itc.cn/q_70/images01/20230302/f063bfdf1f8c46f58682bc1ee3110a0d.jpeg")
+
+        promise.then(function(data){
+            //成功
+            box.appendChild(data)
+        },function(error){
+            box.innerHTML="图片加载失败"
+            console.log(error)
+        })
+    </script>
+
+
+</body>
+</html>

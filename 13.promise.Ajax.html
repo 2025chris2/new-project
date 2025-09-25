@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function timeout(ms){
+            return new Promise((resolve,reject)=>{
+                setTimeout(function(){
+                    console.log("定时器")
+                    resolve()//必须调用resolve函数，使其状态变为resolve，再往下执行
+                },ms)
+            })
+        }
+        //async在要使用异步(promise)的函数前加，await在要使用异步(promise)的语句前加
+        async function asyncPrint(ms,value){
+            //在具有异步操作的代码前放入:await
+            await timeout(ms);
+            console.log(value);
+        }
+        asyncPrint(3000,2)
+
+    </script>
+</body>
+</html>

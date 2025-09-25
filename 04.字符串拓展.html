@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    字符串Unicode 表示法
+    ES6加强了对Unicode的支持,允许采用\uxxxx形式表示一个字符,其中xxxx表示字符的Unicode码点。
+    Unicode
+    统一码(Unicode),也叫万国码、单一码,是计算机科学领域里的一项业界标准,包括字符集、编码方案
+    等。Unicode是为了解决传统的字符编码方案的局限而产生的,它为每种语言中的每个字符设定了统一并且唯
+    一的二进制编码,以满足跨语言、跨平台进行文本转换、处理的要求。
+    "\u0061"
+    // "a"
+    <script>
+        console.log("\u0061")
+        console.log("\u0062")
+        var str="hello";
+        for(let i of str){//for of语句，没什么蛋用
+            console.log(i);
+        }
+
+
+        //模版字符串（使用率最高的)
+        //动态创建一个A标签，A标签href属性也是动态的
+        var href="https://itbaizhan.com"
+        var text="baizhan"
+        //当我向页面动态写入标签的时候，标签的数据一般来源于服务器
+        var it="<a href='"+href+"'>"+text+"</a>";
+        document.write(it);
+        //优化版的
+        var ti=`<a href="${href}">${text}</a>`
+        console.log(ti)
+
+
+    </script>
+</body>
+</html>

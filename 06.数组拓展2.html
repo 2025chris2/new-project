@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Array.from()方法将类数组转为数组,返回一个真正的数组
+    常见的类数组有三类:1.arguments 2.元素集合 3.类似数组的对象
+
+    <h3>11</h3>
+    <h3>11</h3>
+    <h3>11</h3>
+    <script>
+        //1.
+        // arguments 是 JavaScript 函数内部的一个类数组对象，它包含了调用函数时传入的所有参数（即使函数定义时没有显式声明形参）。
+        // arguments:翻译为实参
+        //类数组，伪数组，只能使用数组的读取方式和length属性，不能使用数组方法:push
+        function add(){
+            console.log(arguments);
+            console.log(Array.from(arguments))//变成真正的数组，这段代码最后加
+            // 下面这段代码报错，因为不是一个真正的数组
+            // arguments.push(40);
+        }
+        add(10,20,30)
+
+
+        //2.
+        var a=document.querySelectorAll("h3")
+        console.log(Array.from(a));
+        
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    状态：Promise 有三种状态
+    pending（待定）：异步操作正在进行中	Promise 被创建时	无
+    fulfilled（已实现）：异步操作已成功完成	调用 resolve()	.then() 的第一个回调
+    rejected（已拒绝）：异步操作已失败	调用 reject()	.catch() 或  .then()的第二个回调
+    不可逆性：状态一旦改变就不能再变（从 pending 到 fulfilled 或 rejected）
+    
+
+    Promise 构造函数只接收一个参数，这个参数是一个被称为 "executor"（执行器） 的函数：
+    const promise = new Promise(executorFunction);
+    Executor 函数的参数
+    这个 executor 函数本身接收两个参数，这两个参数都是函数类型：Executor 的职责是执行异步操作，并在操作完成后通过调用（calling）resolve(data) 或 reject(reason) 来通知外部世界最终的结果。
+    Executor 函数本身的返回值没有任何意义，会被忽略。
+    所以，你的代码焦点应该放在 何时以及如何调用 resolve 和 reject，而不是返回它们。
+    resolve - 用于将 Promise 状态从 pending 变为 fulfilled（成功）
+    reject - 用于将 Promise 状态从 pending 变为 rejected（失败）
+    <script>
+        //Async await
+        //步骤1：准备一个返回promise对象的函数
+        function asyncTask(){
+            return new Promise((resolve,reject)=>{
+                //这里有一些代码省略，返回一个isSuccess布尔值
+                const isSuccess=true;
+                if(isSuccess){
+                    resolve('任务2:..成功的处理结果')  //这里执行了resolve函数，给当前的Promise对象的状态赋值
+                }
+                else{
+                    reject('任务2:.失败的处理结果')    //这里执行了reject函数，给当前的promise对象的状态赋值
+                }
+            })
+        }
+
+        //步骤2:为使用await的函数添加async
+        // const data = await asyncTask() 中：
+        // asyncTask() 返回一个 Promise 对象
+        // await 关键字会暂停 async 函数的执行，等待 Promise 解析完成
+        // 如果 Promise 被解决 (resolved)，await 表达式返回 Promise 解决的值,接收语句
+        // 如果 Promise 被拒绝 (rejected)，await 会抛出拒绝的原因,data不会接收任何值，data 不会接收失败信息！当 Promise 被拒绝时，await 会抛出错误，而不是将错误信息赋值给变量。
+        
+
+
+        // async 关键字：
+        // 声明一个函数是异步的
+        // 异步函数总是返回一个 Promise 对象
+        // 如果函数返回值不是 Promise，它会被自动包装成 resolved 的 Promise
+        // await 关键字：
+        // 只能在 async 函数内部使用
+        // 暂停异步函数的执行，等待 Promise 完成
+        // 如果 Promise 被拒绝，await 会抛出异常，可以使用 try/catch 捕获
+        
+        async function main(){
+            try{console.log('任务1')//使用异步的目的:任务一=>任务二=>任务三
+            const data=await asyncTask()//必须用变量接收异步结果！将异步结果存储在变量中，可以使代码更清晰、更易于理解和维护
+            // await 的关键作用：解包（Unwrapping），所以这里的data接收的不是promise对象本身，是promise的结果
+            // await 关键字的核心功能是"解包"Promise。它会暂停异步函数的执行，
+            // 等待 Promise 完成，然后提取出 Promise 的解决值（resolved value），就是resolve函数里面的数据,而不是返回 Promise 对象本身。
+            console.log(data)
+            console.log('任务3')}
+            catch(err){
+                console.log("捕获到错误")
+            }
+        }
+        main()
+
+
+    </script>
+</body>
+</html>

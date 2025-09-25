@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var user = {
+            name: "atp",
+            age: 19
+        }
+        //当输出name,age时要加user.太麻烦了，引入新东西
+        console.log(user.name);
+        console.log(user.age);
+        // 当结构赋值时就简化输出的方式了
+        const{name,age}=user;
+        console.log(name,age);
+        
+        </script>
+</body>
+
+</html>

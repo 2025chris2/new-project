@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    p1.then() 方法是Promise对象的核心方法,用于处理Promise的完成和拒绝状态。
+    它接受两个参数（都是可选的）：
+    第一个参数:Promise成功(resolved)时的回调函数
+    第二个参数:Promise失败(rejected)时的回调函数
+    then()方法会返回一个新的Promise(此promise对象状态是resolved，使代码继续运行下去),这使得Promise可以链式调用。
+
+    如果 p1 是 resolved 的话，p1.then 的 data 参数是否会自动赋值？
+    是的。当 p1 被 resolve 时（例如，调用 resolve('任务1:成功的信息')），
+    p1 的状态会变为 fulfilled（已解决），并且 resolve 的值（如字符串 '任务1:成功的信息'）
+    会自动传递给 p1.then 的第一个回调函数（即 data 参数）。然后，第一个回调函数会被执行。
+
+    如果 p1 失败（被 reject）但 p1.then 的 err 回调存在，怎么继续执行下面的代码？
+    是 p1.then 方法返回一个新的 Promise（我们称之为 p2），
+    这个新 Promise 的状态取决于 err 回调函数的执行结果：
+    如果 err 回调函数被调用（因为 p1 被 reject），并且回调函数正常执行（没有抛出错误或返回一个 rejected Promise），
+    那么 p2 会被 resolve 为 err 回调函数的返回值（如果回调没有显式返回，则返回 undefined）。
+    因此，尽管 p1 是 rejected，但由于 err 回调存在且没有抛出错误，p2 的状态会变为 resolved，这样 Promise 链就可以继续执行后续的 .then 回调（如果有的话）。
+    <script>
+            const p1 = new Promise((resolve, reject) => {
+                reject('任务1:失败的信息');
+            });
+            
+            p1.then(data => {
+                console.log(data);
+                return new Promise((resolve, reject) => {
+                    resolve('任务2:成功得到数据')//调用了resolve函数，才能使代码往下走
+                    //reject('失败的信息');
+                });
+            },err=>{
+                // 隐式返回undefined，相当于返回一个状态为resolve的promise对象，使得函数继续执行，而不中断
+                //相当于返回一个状态为resolve的promise对象，所以不需要手动返回Promise对象依旧可以继续往下走而不停止
+                console.log('任务1:失败了')
+                // reject();
+            })
+            .then(data => {
+                console.log(data);
+                // 添加一个代码
+
+            },err=>{
+                console.log('任务2:失败了')
+            })
+
+            //当两个.then都有err结果的处理代码，就不需要.catch，如果任何一个没有err的处理，则需要.catch来捕获错误
+            //.catch(err => {
+            //     console.log(err);
+            // });
+
+            这段代码如果状态是resolved,则手动返回一个Promise对象,如果是reject,且你写了err的代码,那么系统自动
+            生成一个新的promise对象且对象的状态为resolve
+            
+    </script>
+    当p1的状态是reject时，在p1.then执行err的函数，并继续往下走，在.then中应该执行哪条函数呢？
+
+这是一个非常好的问题，它触及了 Promise 链式调用的核心机制。让我们来一步步分析这段代码。
+结论
+当 p1 被 reject 后：
+
+第一个 .then() 的 第二个回调（错误处理函数） err => { ... } 会被执行，打印出 '任务1:失败了'。
+接着，链式调用会继续执行第二个 .then() 的 第一个 回调（成功处理函数） data => { ... }。
+最终控制台输出为：
+
+ 任务1:失败了
+undefined
+详细原理分析
+Promise 链式调用的关键在于：.then() 方法总是返回一个新的 Promise。这个新 Promise 的状态由 .then() 中指定的回调函数（onFulfilled 或 onRejected）的返回值决定。
+
+我们来分解你的代码：
+
+p1 的状态：
+
+p1 被同步 reject，所以它的状态是 rejected。
+第一个 .then() 的执行：
+
+p1.then(successCallback1, errorCallback1)
+因为 p1 是 rejected，所以会执行 errorCallback1（即 err => { console.log('任务1:失败了') }）。
+这个错误处理函数没有通过 throw 抛出新的错误，也没有返回一个状态为 rejected 的 Promise。它只是打印了一行日志，然后隐式返回了 undefined。
+第一个 .then() 返回的新 Promise 的状态：
+根据 Promise 的规则，如果一个 Promise 的错误处理函数（onRejected）没有抛出异常，而是正常返回了一个值（即使是 undefined），那么它就会“修复”这个错误，并且这个新返回的 Promise 的状态会变为 fulfilled。
+所以，p1.then(...) 返回的是一个 fulfilled 状态的 Promise，并且它的 value（结果值）是 undefined（因为错误处理函数返回了 undefined）。
+第二个 .then() 的执行：
+现在链式调用变成了：(fulfilled Promise with value: undefined).then(successCallback2, errorCallback2)
+因为上一个 Promise 是 fulfilled 状态，所以自然会执行 successCallback2（即 data => { console.log(data) }）。
+这个 data 参数就是上一个 Promise 的 value，也就是 undefined。所以它会打印出 undefined。
+错误处理函数 errorCallback2 不会被调用，因为根本没有发生错误。
+
+
+Promise.prototype.then() 方法的设计非常巧妙，它通过检查参数是否存在来决定行为，而不是要求你必须传两个参数
+当你调用 .then() 时，JavaScript 引擎会检查你传递的参数：
+
+如果你只传递一个函数 → 它会被当作 onFulfilled（成功回调）
+第二个参数 onRejected（失败回调） → 会被设置为 undefined
+
+你的代码	          JavaScript 的解释
+.then(func)	         .then(func, undefined)
+.then(null,func)	 .then(undefined, func)
+.then()	             .then(undefined, undefined)
+
+.then()不是通过关键字传参，而是通过：
+参数的位置（第一个还是第二个）
+检查参数是否存在（是否为 undefined 或 null）
+来决定调用哪个回调函数。这种灵活的设计让 Promise 链式调用变得简洁而强大。
+</body>
+
+</html>
+
