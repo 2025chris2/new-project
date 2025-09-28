@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            width: 800px;
+            border:1px solid red;
+            display:flex;
+            gap:10px;/*让每个元素都间隔相同，而两边紧贴边缘*/
+        }
+        .box .item{
+            /*flex优先级比width和height高，即使定义了宽和高*/
+            flex:1;/*每一个子元素占(剩余的空间)一份，将父元素占满,和父元素宽度相关*/
+            width: 80px;
+            height: 60px;
+            background-color:pink;
+            /* margin:3px; */
+
+        }
+        .box .item:nth-child(3){
+            flex:2;/*第三份占总的两份*/
+        }
+    </style>
+</head>
+<body>
+    给子类的
+    flexbox 项目(子盒子)属性 
+    子元素的属性用于控制自身的尺寸、顺序或对齐方式
+
+    语法:
+    flex:1;剩余空间占1份,并且可以伸缩盒子大小
+    数字表示剩余空间所占份数。正整数
+    <div class="box">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        
+    </div>
+
+    给父类的
+    gap简写属性用于设置行与列之间的间隙(间距)
+    使用场景:
+    1. 让子元素之间保留间隙
+    语法:
+    gap:20px;行和列之间保持20像素间隙。
+    gap:20px 30px;行间距是20像素,列间距是30像素。
+</body>
+</html>

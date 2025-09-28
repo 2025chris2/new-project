@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charse
+t="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            
+        }
+        .l{/*子类*/
+            width: 50px;
+            /* height: 50px; */
+            background-color:pink;
+            margin:5px;
+            
+            
+        }
+        .t{/*父类*/
+            display:flex;
+            width: 400px;
+            height: 300px;
+            border:1px solid red;
+            /* justify-content:space-evenly; */
+            align-items:stretch/*执行这句话时，必须将子类的高度取消了，不然拉伸不了，其他的都不用添加或删除语句*/
+        }
+
+    </style>
+</head>
+<body>
+    主轴默认水平向右
+    justify-content(给父类的)                  定义"主轴"上的对齐方式
+    属性值                                      效果    (有五个方格)                    示例
+
+    flex-start                              左对齐(默认)   aaa--                 子元素靠左排列
+
+    flex-end                                右对齐         --aaa                子元素靠右排列
+
+    center                                    居中对齐     -aaa-                 子元素居中
+
+    space-between                           两端对齐       a-a-a            首个子元素放置于起点末尾元素放置于终点
+
+    space-around                    项目两侧间隔相等        -a-a-a-(两侧的-是半个宽)          每个子元素周围分配相同的空间
+
+    space-evenly                    项目间隔均匀分布        -a-a-a-(所有的-都一样宽)                  每个子元素之间的间隔相等
+
+
+
+    交叉轴就是垂直于主轴的
+    align-items(给父类的)          定义"交叉轴"上的对齐方式(单行时整体对齐)
+    属性值                                     作用描述
+                    |--------|
+    flex-start      |aaa     |(垂直方向上靠近上面)                  项目在交叉轴起点对齐(默认值)
+                    |        |
+                    |--------|
+
+    flex-end                              项目在交叉轴终点对齐
+                    |--------|
+                    |        | (垂直方向上靠近下面)      
+                    |aaa     |
+                    |--------|
+
+    center                                 项目在交叉轴居中对齐
+                    |--------|
+                    |        | (垂直方向上靠近中间)      
+                    |aaa     |
+                    |        |
+                    |--------|
+
+    stretch                                  项目拉伸填充整个容器高度(需子项目无固定高度)
+                    |--------|
+                    | aa     |(填充满整个格子)
+                    | aa     |
+                    |--------|
+    
+
+    
+
+       
+
+    
+
+    
+
+
+    <div class="t">
+        <div class="l">1</div>
+        <div class="l">2</div>
+        <div class="l">3</div>
+        <div class="l">4</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

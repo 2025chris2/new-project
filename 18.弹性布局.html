@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div p{
+            background-color:red;
+            margin:5px;
+            width:50px;
+            height: 50px;
+        }
+        .box{
+            width:400px;
+            height: 400px;
+            display:flex;
+        }
+    </style>
+</head>
+<body>
+    弹性盒子核心:
+    1.父控子(亲父子)
+     父盒子控制子盒子如何排列布局
+     父盒子称为容器,子盒子称为项目
+    2.主轴和交叉轴(侧轴)
+     主轴默认水平方向,交叉轴默认垂直方向,可以更改
+
+    主轴的作用:控制子盒子的排列方式,默认水平方式（可以转换）；交叉轴是垂直方向
+
+    父容器的属性作用
+    display                     定义元素为Flex容器,按照水平方向来排列              .container { display: flex; }
+
+    flex-direction              定义主轴方向(项目排列方向)        .container { flex-direction: row; }
+
+    flex-wrap                   控制是否换行                               .container { flex-wrap: wrap; }
+
+    justify-content             定义主轴上的对齐方式(整体分布)      .container { justify-content: center; }
+
+    align-items                    定义交叉轴上的对齐方式(单行时  整体对齐)    .container { align-items: center; }
+
+    align-content           定义多行时交叉轴上的对齐方式(仅当flex-wrap: wrap且内容换行时生效)  .container { align-content: space-between; }
+
+
+    项目(子盒子)属性
+    属性
+    order           定义项目的排列顺序(默认0,数值越小越靠前)                                .item { order: -1; }
+
+    flex-grow       定义项目的放大比例(默认0,即不放大)                                .item { flex-grow: 1; }
+
+    flex-shrink     定义项目的缩小比例(默认1,空间不足时等比缩小)                            .item { flex-shrink: 0; }
+
+    flex-basis      定义项目在主轴方向上的初始大小(优先级高于width/height)                  .item { flex-basis: 200px; }
+
+    flex            flex-grow、flex-shrink、flex-basis 的简写                           .item { flex: 1; }
+
+    align-self      覆盖容器的align-items,单独定义某个项目的交叉轴对齐方式              .item { align-self: center; }
+
+
+
+
+
+
+    <div class="box">
+        <p></p>
+        <p>
+        </p>
+        <p></p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

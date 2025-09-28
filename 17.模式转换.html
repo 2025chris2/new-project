@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing:border-box;
+        }
+        .subber{
+            width: 234px;
+            height: 460px;
+            font-size: 14px;
+            background-color: #9d9b9b;
+            margin:100px auto;
+            padding:20px 0;
+        }
+        .subber ul li a{
+            display:block;
+            height:42px;
+            line-height:42px;
+            transition:all.4s;
+            color:#fff;
+        }
+        .subber ul li a:hover{
+            background-color: #ff6700;
+        }
+        .subber ul li{
+            list-style:none
+        }
+        .list{
+            width:400px;
+            height: 400px;
+            border:1px solid red;
+            margin:0 auto;
+        }
+        .list a{
+            display:inline-block;
+            height:30px;
+            line-height:30px;
+            color:#fff;
+            background-color:#ccc;
+            border-radius:5px;
+            font-size:15px;
+            padding:0 15px;
+            margin:4px;
+        }
+    </style>
+</head>
+<body>
+    display属性允许我们更改默认的显示方式此属性。
+    display:block;          转换为区块元素(常用)
+    display:inline;         转换为行内元素(罕见)
+
+    display: inline-block;  转换为行内块元素(较少)
+    表单元素默认inline-block,其他元素想要转换可以:display:inline-block;
+    使用场景:
+    1. 让块级盒子一行显示。
+    2. 让行内盒子具备宽度高度。
+    
+    <div class="subber">
+        <ul>
+            <li><a href="#">手机</a></li>
+            <li><a href="#">电视</a></li>
+            <li><a href="#">平板</a></li>
+            <li><a href="#">电脑</a></li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <a href="#">风景图</a>
+        <a href="#">壁纸</a>
+        <a href="#">打好河山</a>
+        <a href="#">点击我试试</a>
+        <a href="#">试试我就试试</a>
+    </div>
+</body>
+</html>

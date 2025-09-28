@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul li{
+            list-style:none;
+            display:flex;/*当行内元素或盒子，设置了display=flex时，可以给它添加宽度和高度了*/
+            flex-direction:column;
+
+        }
+        ul li p{
+            width: 80px;/*当行内元素或盒子，设置了display=flex时，可以给它添加宽度和高度了*/
+            height: 100%;/*当行内元素或盒子，设置了display=flex时，可以给它添加宽度和高度了*/
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    交叉轴就是垂直于主轴的
+    flex-direction 定义主轴方向(改变主轴方向)
+    属性值                          描述                                    示例效果                    代码示例
+    row默认值。         主轴是从左指向右的，子元素沿水平主轴(从左到右)排列。        ABC(横向排列)                               .container { flex-direction: row; }
+
+    row-reverse         主轴是从右指向左的，子元素沿水平主轴反向排列(从右到左)。        CBA(反向横向排列)                           .container { flex-direction: row-reverse; }
+
+    column              主轴是从上指向下的，子元素沿垂直主轴(从上到下)排列。            A(纵向排列)                         .container { flex-direction: column; }
+                                                                                    B
+                                                                                    C
+
+    column-reverse      主轴是从下指向上的，子元素沿垂直主轴反向排列(从下到上)。            C(反向纵向排列)                     .container { flex-direction: column-reverse; }
+                                                                                         B
+                                                                                         A 
+
+    <ul>
+        <li>
+            <p>自我</p>
+            <p>图片</p>
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
